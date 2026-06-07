@@ -109,16 +109,16 @@ const items: Item[] = [
 
 export function Portfolio() {
   return (
-    <section id="portfolio" className="py-24 md:py-40">
-      <div className="mx-auto max-w-[1600px] px-6 md:px-12">
-        <header className="reveal flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16 md:mb-24">
+    <section id="portfolio" className="py-16 md:py-40">
+      <div className="mx-auto max-w-[1600px] px-5 md:px-12">
+        <header className="reveal flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 md:mb-24">
           <div>
             <span className="eyebrow">— Sala 01 / Portfolio</span>
-            <h2 className="mt-5 font-display text-5xl md:text-7xl leading-[1] tracking-tight">
+            <h2 className="mt-4 font-display text-4xl md:text-7xl leading-[1] tracking-tight">
               Exposición<br /><span className="italic text-stone">permanente</span>.
             </h2>
           </div>
-          <p className="max-w-md text-foreground/70 leading-relaxed">
+          <p className="max-w-md text-foreground/70 leading-relaxed text-sm md:text-base">
             Diez salas, una misma sensibilidad. Recorra cada disciplina como quien atraviesa las galerías de un museo contemporáneo: con tiempo, en silencio, con la mirada despierta.
           </p>
         </header>
