@@ -4,14 +4,14 @@ export function Contact() {
   const [sent, setSent] = useState(false);
 
   return (
-    <section id="contacto" className="bg-ink text-paper py-24 md:py-40">
-      <div className="mx-auto max-w-[1600px] px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-16">
+    <section id="contacto" className="bg-ink text-paper py-16 md:py-40">
+      <div className="mx-auto max-w-[1600px] px-5 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12 md:gap-16">
         <div className="reveal lg:col-span-5">
           <span className="eyebrow !text-paper/60">— Sala 06 / Contacto</span>
-          <h2 className="mt-5 font-display text-5xl md:text-7xl leading-[1]">
+          <h2 className="mt-4 font-display text-4xl md:text-7xl leading-[1]">
             Hablemos<br /><span className="italic text-sand">en privado</span>.
           </h2>
-          <p className="mt-8 text-paper/70 max-w-md font-light text-lg">
+          <p className="mt-6 md:mt-8 text-paper/70 max-w-md font-light text-base md:text-lg">
             Cuéntenos su proyecto. Respondemos en menos de 24 horas, con discreción y sin compromiso.
           </p>
 

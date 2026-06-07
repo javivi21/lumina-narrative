@@ -65,17 +65,24 @@ export function Nav() {
       </div>
 
       {open && (
-        <div className="md:hidden glass mt-3 mx-6 p-6 flex flex-col gap-4">
+        <div className="md:hidden glass mt-3 mx-5 p-6 flex flex-col gap-5">
           {links.map((l) => (
             <a
               key={l.href}
               href={l.href}
               onClick={() => setOpen(false)}
-              className="text-base text-foreground/80"
+              className="font-display text-2xl text-foreground/90"
             >
               {l.label}
             </a>
           ))}
+          <a
+            href="#contacto"
+            onClick={() => setOpen(false)}
+            className="mt-2 inline-flex items-center justify-center gap-2 text-[0.65rem] tracking-[0.3em] uppercase bg-foreground text-background px-5 py-4"
+          >
+            Reservar sesión
+          </a>
         </div>
       )}
     </header>
