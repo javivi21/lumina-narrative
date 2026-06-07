@@ -136,20 +136,20 @@ export function Portfolio() {
                   loading="lazy"
                   className="absolute inset-0 h-full w-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-black/0 md:from-black/60 md:via-black/0 md:to-black/0 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-700" />
                 <div className="absolute top-4 left-4 text-paper/90 font-display text-sm tracking-[0.3em]">
                   {it.n}
                 </div>
-                <div className="absolute bottom-0 left-0 right-0 p-5 md:p-7 translate-y-2 group-hover:translate-y-0 transition-transform duration-700">
+                <div className="absolute bottom-0 left-0 right-0 p-5 md:p-7 md:translate-y-2 md:group-hover:translate-y-0 transition-transform duration-700">
                   <div className="text-paper">
                     <h3 className="font-display text-2xl md:text-3xl">{it.title}</h3>
-                    <p className="mt-2 text-sm text-paper/80 max-w-md opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                    <p className="mt-2 text-sm text-paper/80 max-w-md opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 delay-100">
                       {it.desc}
                     </p>
                   </div>
                 </div>
               </div>
-              <div className="mt-3 flex items-center justify-between text-xs">
+              <div className="mt-3 hidden md:flex items-center justify-between text-xs">
                 <span className="font-display text-lg">{it.title}</span>
                 <span className="eyebrow">Ver galería →</span>
               </div>
