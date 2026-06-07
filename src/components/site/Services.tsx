@@ -38,16 +38,16 @@ export function Services() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-14 md:gap-y-20">
           {groups.map((g) => (
             <div key={g.n} className="reveal group">
-              <div className="flex items-baseline gap-6 mb-8">
+              <div className="flex items-baseline gap-6 mb-6 md:mb-8">
                 <span className="font-display text-3xl text-sand/70">{g.n}</span>
                 <span className="h-px flex-1 bg-paper/15" />
               </div>
-              <h3 className="font-display text-3xl md:text-4xl mb-8">{g.title}</h3>
-              <ul className="grid grid-cols-2 gap-x-6 gap-y-3">
+              <h3 className="font-display text-2xl md:text-4xl mb-6 md:mb-8">{g.title}</h3>
+              <ul className="grid grid-cols-2 gap-x-4 md:gap-x-6 gap-y-3">
                 {g.items.map((it) => (
                   <li
                     key={it}
-                    className="text-sm text-paper/75 border-b border-paper/10 pb-2 hover:text-paper hover:border-paper/40 transition-colors"
+                    className="text-xs md:text-sm text-paper/75 border-b border-paper/10 pb-2 hover:text-paper hover:border-paper/40 transition-colors"
                   >
                     {it}
                   </li>
