@@ -9,6 +9,8 @@
 
 - Desarrollo / programación
 - Edición de vídeo, foto y 3D
+- No es jugador (gaming ocasional, no es prioridad) — la CPU se elige por rendimiento
+  sostenido en render/compilación, no por caché orientada a juegos
 
 ## Presupuesto de actualización (horizonte 6 meses)
 
@@ -60,11 +62,21 @@ No haría falta cambiar placa base ni RAM.
 
 ### Opción A — CPU (imprescindible, soluciona el cuello de botella)
 
+> Nota: se descartan las variantes **X3D** (3D V-Cache). Esa caché extra se nota sobre
+> todo en juegos y algunas apps sensibles a caché; al no ser jugador, para desarrollo,
+> render y exportación de vídeo/3D rinde más una CPU con **más núcleos y reloj alto**
+> sin la penalización de reloj que tienen los X3D por su caché apilada (ej. el 5800X3D
+> boostea a 4,5 GHz frente a 4,7 GHz del 5800X normal).
+
 | CPU | Núcleos/Hilos | Pros | Contras | Precio aprox. | Enlace |
 |---|---|---|---|---|---|
-| AMD Ryzen 7 5700X3D | 8/16, hasta 4,1 GHz, 96MB caché 3D | El más barato de los tres; salto enorme respecto al 3400G; bajo consumo (105W) | Frecuencias algo más bajas que el 5800X3D | ~230-300€ | [PcComponentes](https://www.pccomponentes.com/amd-ryzen-7-5700x3d-3-41ghz-box) |
-| AMD Ryzen 7 5800X3D (10th Anniversary) | 8/16, hasta 4,5 GHz, 96MB caché 3D | Mejor CPU AM4 para gaming y apps sensibles a caché; relanzado en 2026 más barato que en su lanzamiento | No trae disipador; TDP 105W | ~330-360€ | [PcComponentes](https://www.pccomponentes.com/procesador-amd-ryzen-7-5800x3d-8-nucleos-3-4-ghz-base-4-5-ghz-turbo-96-mb-cache-l3) |
-| AMD Ryzen 9 5900X | 12/24, hasta 4,8 GHz | Más núcleos: ideal para renderizado (Blender/DaVinci), exportación de vídeo y VMs/contenedores de desarrollo en paralelo | Más caro; no incluye disipador; más consumo | ~450-570€ | [Coolmod](https://www.coolmod.com/amd-ryzen-9-5900x-48ghz-socket-am4-boxed-procesador/) · [idealo](https://www.idealo.es/precios/200732985/amd-ryzen-9-5900x.html) |
+| AMD Ryzen 7 5800X | 8/16, hasta 4,7 GHz | Muy buena relación precio/rendimiento; reloj más alto que el 5800X3D; barato ahora mismo | Menos núcleos que el 5900X/5950X para render pesado | ~160-220€ | [PcComponentes](https://www.pccomponentes.com/amd-ryzen-7-5800x-38ghz) |
+| AMD Ryzen 9 5950X | 16/32, hasta 4,9 GHz, 72MB caché | El más completo: máximo de núcleos y reloj más alto de los tres, ideal para render 3D, exportación de vídeo y VMs/contenedores en paralelo; ahora mismo a un precio muy competitivo | TDP 105W, conviene buena disipación | ~340-350€ | [PcComponentes](https://www.pccomponentes.com/amd-ryzen-9-5950x-34-ghz) · [idealo](https://www.idealo.es/precios/200732946/amd-ryzen-9-5950x.html) |
+| AMD Ryzen 9 5900X | 12/24, hasta 4,8 GHz | Intermedio en núcleos | Actualmente más caro que el 5950X (16 núcleos) en varias tiendas — comprueba precios antes de elegirlo | ~450-570€ | [Coolmod](https://www.coolmod.com/amd-ryzen-9-5900x-48ghz-socket-am4-boxed-procesador/) · [idealo](https://www.idealo.es/precios/200732985/amd-ryzen-9-5900x.html) |
+
+**Recomendación:** el **Ryzen 9 5950X** es el mejor pick para tu caso (dev + vídeo/3D,
+sin necesidad de gaming): más núcleos que el 5900X y, ahora mismo, a un precio similar
+o incluso inferior. El 5800X queda como alternativa si se prefiere ajustar más el gasto.
 
 **Disipador recomendado** (ninguna de las CPU anteriores incluye uno adecuado):
 Thermalright Peerless Assassin 120 SE (doble torre, apto AM4) — ~35-40€ —
@@ -97,9 +109,9 @@ de footage de vídeo entre el PC y el NAS.
 
 | Paquete | Contenido | Coste total aprox. | Recomendado si... |
 |---|---|---|---|
-| **Básico** | Ryzen 7 5700X3D + disipador | ~270-340€ | Quieres resolver el cuello de botella gastando lo mínimo |
-| **Equilibrado** (recomendado) | Ryzen 7 5800X3D + disipador + switch y NIC 2.5GbE | ~420-450€ | Quieres el mejor CPU gaming/creación de AM4 y de paso mejoras la velocidad con el NAS |
-| **Máximo rendimiento** | Ryzen 9 5900X + disipador + switch y NIC 2.5GbE | ~540-660€ | Priorizas núcleos para render/exportación y multitarea de desarrollo (deja margen del presupuesto sin tocar la GPU) |
+| **Básico** | Ryzen 7 5800X + disipador | ~200-260€ | Quieres resolver el cuello de botella gastando lo mínimo |
+| **Equilibrado (recomendado)** | Ryzen 9 5950X + disipador + switch y NIC 2.5GbE | ~420-440€ | Quieres el máximo de núcleos para render/exportación/dev y de paso mejoras la velocidad con el NAS |
+| **Máximo rendimiento** | Ryzen 9 5950X + disipador de mayor gama (AIO 240/280mm) + switch y NIC 2.5GbE | ~500-600€ | Quieres exprimir el 5950X con temperaturas más bajas y sostener el boost más tiempo en cargas largas de render |
 
 Con cualquiera de los tres paquetes sobra presupuesto (dentro del rango 500-1500€) para,
 si se desea más adelante, dar el salto de GPU (Opción B) sin comprometer el resto.
@@ -111,3 +123,4 @@ si se desea más adelante, dar el salto de GPU (Opción B) sin comprometer el re
 | 2026-07-20 | Ficha inicial creada con el listado de componentes actuales |
 | 2026-07-20 | Añadidos datos de red: router-ONT ZTE ZXHN F6640 (WiFi 6, GPON) y switch D-Link DGS-105 (5 puertos Gigabit) |
 | 2026-07-20 | Añadida propuesta de actualización con tablas comparativas de CPU, GPU y red, y enlaces de compra |
+| 2026-07-20 | Revisada la propuesta de CPU: se descartan las variantes X3D (orientadas a gaming) y se prioriza el Ryzen 9 5950X por núcleos y reloj sostenido, ya que el usuario no es jugador |
