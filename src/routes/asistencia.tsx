@@ -29,6 +29,8 @@ export const Route = createFileRoute("/asistencia")({
 
 const STORAGE_KEY = "asistencia-silat";
 const MAX_PLAZAS = 16;
+const RESERVA_PLAZAS = 3; // plazas que se dejan libres por si se llena
+const LIMITE_INSCRIPCION = MAX_PLAZAS - RESERVA_PLAZAS;
 
 const DEFAULT_STUDENT_NAMES = [
   "Rut",
@@ -113,11 +115,60 @@ function yearKey(date: string) {
   return date.slice(0, 4); // YYYY
 }
 
+function weekKey(date: string) {
+  const d = new Date(date + "T12:00:00");
+  const dayNum = (d.getDay() + 6) % 7; // Monday = 0
+  d.setDate(d.getDate() - dayNum + 3); // Thursday of this ISO week
+  const isoYear = d.getFullYear();
+  const firstThursday = new Date(isoYear, 0, 4);
+  const firstDayNum = (firstThursday.getDay() + 6) % 7;
+  firstThursday.setDate(firstThursday.getDate() - firstDayNum + 3);
+  const week = 1 + Math.round((d.getTime() - firstThursday.getTime()) / (7 * 86400000));
+  return `${isoYear}-W${String(week).padStart(2, "0")}`;
+}
+
+function quarterKey(date: string) {
+  const [year, month] = date.split("-");
+  const quarter = Math.ceil(Number(month) / 3);
+  return `${year}-Q${quarter}`;
+}
+
+function semesterKey(date: string) {
+  const [year, month] = date.split("-");
+  const semester = Number(month) <= 6 ? 1 : 2;
+  return `${year}-S${semester}`;
+}
+
+type StatsScope = "week" | "month" | "quarter" | "semester" | "year";
+
+const SCOPE_LABELS: Record<StatsScope, string> = {
+  week: "semanal",
+  month: "mensual",
+  quarter: "trimestral",
+  semester: "semestral",
+  year: "anual",
+};
+
+function scopeKeyFor(scope: StatsScope, date: string) {
+  switch (scope) {
+    case "week":
+      return weekKey(date);
+    case "month":
+      return monthKey(date);
+    case "quarter":
+      return quarterKey(date);
+    case "semester":
+      return semesterKey(date);
+    case "year":
+      return yearKey(date);
+  }
+}
+
 function AsistenciaPage() {
   const [data, setData] = useState<StoredData>({ students: [], records: [] });
   const [newStudentName, setNewStudentName] = useState("");
   const [selectedDate, setSelectedDate] = useState(lastClassDate());
-  const [statsScope, setStatsScope] = useState<"month" | "year">("month");
+  const [statsScope, setStatsScope] = useState<StatsScope>("month");
 
   useEffect(() => {
     setData(loadData());
@@ -165,14 +216,13 @@ function AsistenciaPage() {
     });
   }
 
-  const scopeKey = statsScope === "month" ? monthKey(selectedDate) : yearKey(selectedDate);
+  const scopeKey = scopeKeyFor(statsScope, selectedDate);
 
   const stats = useMemo(() => {
     return data.students.map((student) => {
       const studentRecords = data.records.filter((r) => {
         if (r.studentId !== student.id) return false;
-        const key = statsScope === "month" ? monthKey(r.date) : yearKey(r.date);
-        return key === scopeKey;
+        return scopeKeyFor(statsScope, r.date) === scopeKey;
       });
       const attended = studentRecords.filter((r) => r.present).length;
       const total = studentRecords.length;
@@ -193,10 +243,11 @@ function AsistenciaPage() {
           <CardTitle className="text-base">Alumnos</CardTitle>
           <span
             className={`text-sm font-medium ${
-              data.students.length >= MAX_PLAZAS ? "text-red-600" : "text-muted-foreground"
+              data.students.length >= LIMITE_INSCRIPCION ? "text-red-600" : "text-muted-foreground"
             }`}
           >
-            Plazas: {data.students.length}/{MAX_PLAZAS}
+            Plazas: {data.students.length}/{LIMITE_INSCRIPCION} (máx. sala {MAX_PLAZAS}, reserva{" "}
+            {RESERVA_PLAZAS})
           </span>
         </CardHeader>
         <CardContent>
@@ -206,14 +257,16 @@ function AsistenciaPage() {
               value={newStudentName}
               onChange={(e) => setNewStudentName(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && addStudent()}
-              disabled={data.students.length >= MAX_PLAZAS}
+              disabled={data.students.length >= LIMITE_INSCRIPCION}
             />
-            <Button onClick={addStudent} disabled={data.students.length >= MAX_PLAZAS}>
+            <Button onClick={addStudent} disabled={data.students.length >= LIMITE_INSCRIPCION}>
               Añadir
             </Button>
           </div>
-          {data.students.length >= MAX_PLAZAS && (
-            <p className="mt-2 text-sm text-red-600">Lista completa, sin plazas libres.</p>
+          {data.students.length >= LIMITE_INSCRIPCION && (
+            <p className="mt-2 text-sm text-red-600">
+              Lista completa. Se mantienen {RESERVA_PLAZAS} plazas de reserva sin asignar.
+            </p>
           )}
         </CardContent>
       </Card>
@@ -277,14 +330,17 @@ function AsistenciaPage() {
       <Card className="mt-6">
         <CardHeader className="flex flex-row items-center justify-between gap-4">
           <CardTitle className="text-base">
-            Estadística {statsScope === "month" ? `mensual (${scopeKey})` : `anual (${scopeKey})`}
+            Estadística {SCOPE_LABELS[statsScope]} ({scopeKey})
           </CardTitle>
-          <Select value={statsScope} onValueChange={(v) => setStatsScope(v as "month" | "year")}>
-            <SelectTrigger className="w-32">
+          <Select value={statsScope} onValueChange={(v) => setStatsScope(v as StatsScope)}>
+            <SelectTrigger className="w-36">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
+              <SelectItem value="week">Semanal</SelectItem>
               <SelectItem value="month">Mensual</SelectItem>
+              <SelectItem value="quarter">Trimestral</SelectItem>
+              <SelectItem value="semester">Semestral</SelectItem>
               <SelectItem value="year">Anual</SelectItem>
             </SelectContent>
           </Select>
