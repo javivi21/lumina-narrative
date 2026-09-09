@@ -28,7 +28,7 @@ export const Route = createFileRoute("/asistencia")({
 });
 
 const STORAGE_KEY = "asistencia-silat";
-const MAX_PLAZAS = 17;
+const MAX_PLAZAS = 16;
 
 const DEFAULT_STUDENT_NAMES = [
   "Rut",
@@ -39,7 +39,6 @@ const DEFAULT_STUDENT_NAMES = [
   "Estefania",
   "Lau Poli Silat",
   "mariosandoval69",
-  "Nikita Silat",
   "Laura Silat",
   "Oscar Silat V",
   "Pedro Felipe",
