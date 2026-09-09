@@ -28,7 +28,28 @@ export const Route = createFileRoute("/asistencia")({
 });
 
 const STORAGE_KEY = "asistencia-silat";
-const MAX_PLAZAS = 16;
+const MAX_PLAZAS = 18;
+
+const DEFAULT_STUDENT_NAMES = [
+  "Rut",
+  "Sergio Silat",
+  "Alejandro Granjero",
+  "Blancrow",
+  "DAVID Silat Bombero Forestal",
+  "Estefania",
+  "Lau Poli Silat",
+  "mariosandoval69",
+  "Nikita Silat",
+  "Laura Silat",
+  "Oscar Silat V",
+  "Pedro Felipe",
+  "RBK",
+  "Alberto Silat",
+  "Diego Morales",
+  "Elias Crazy D",
+  "Jana",
+  "JORGE PATA",
+];
 
 interface Student {
   id: string;
@@ -46,14 +67,21 @@ interface StoredData {
   records: AttendanceRecord[];
 }
 
+function defaultData(): StoredData {
+  return {
+    students: DEFAULT_STUDENT_NAMES.map((name) => ({ id: crypto.randomUUID(), name })),
+    records: [],
+  };
+}
+
 function loadData(): StoredData {
   if (typeof window === "undefined") return { students: [], records: [] };
   try {
     const raw = window.localStorage.getItem(STORAGE_KEY);
-    if (!raw) return { students: [], records: [] };
+    if (!raw) return defaultData();
     return JSON.parse(raw) as StoredData;
   } catch {
-    return { students: [], records: [] };
+    return defaultData();
   }
 }
 
