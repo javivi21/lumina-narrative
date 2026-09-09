@@ -24,6 +24,14 @@ usuario diga qué números asistieron, y registrarlo.
 
 Si no lo pide, recordárselo martes y jueves a las 22:00.
 
+## Aviso automático martes/jueves 22:00
+
+El usuario quiere un recordatorio recurrente para actualizar la asistencia
+cada martes y jueves a las 22:00. **Importante**: los avisos `CronCreate`
+son solo de la sesión activa (caducan a los 7 días y no sobreviven a un
+reinicio). Al empezar una sesión nueva, si el usuario no lo menciona,
+proponerle reprogramarlo con `CronCreate` (cron `0 22 * * 2,4`).
+
 ## Backup en Google Drive
 
 Cuenta: javivi21@gmail.com. Hay una copia de la asistencia registrada en
@@ -51,9 +59,8 @@ las herramientas de Google Drive.
   Laura Silat, Oscar Silat V, Pedro Felipe, RBK, Alberto Silat, Diego
   Morales, Elias Crazy D. No asistieron: Alejandro Granjero, Blancrow,
   DAVID Silat Bombero Forestal, Estefania, mariosandoval69, Jana.
-- Aviso cron martes/jueves 22:00 programado, pero es **solo de esta
-  sesión** (caduca a los 7 días) — no sobrevive a un reinicio de sesión.
-  Hay que volver a pedirlo si hace falta.
+- Aviso cron martes/jueves 22:00 reprogramado dos veces en esta sesión
+  (sigue siendo solo de sesión, ver arriba).
 - Limitación importante: esta memoria (CLAUDE.md + este archivo) es lo
   único que persiste entre sesiones. La asistencia real que el usuario
   marca en el móvil vive en `localStorage` del navegador y Claude no tiene
