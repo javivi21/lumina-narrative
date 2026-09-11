@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 
 const links = [
-  { href: "#portfolio", label: "Portfolio" },
-  { href: "#servicios", label: "Servicios" },
-  { href: "#filosofia", label: "Filosofía" },
-  { href: "#journal", label: "Journal" },
-  { href: "#contacto", label: "Contacto" },
+  { href: "/#portfolio", label: "Portfolio" },
+  { href: "/#servicios", label: "Servicios" },
+  { href: "/#filosofia", label: "Filosofía" },
+  { href: "/#journal", label: "Journal" },
+  { href: "/#contacto", label: "Contacto" },
 ];
 
 export function Nav() {
@@ -26,7 +26,7 @@ export function Nav() {
       }`}
     >
       <div className="mx-auto max-w-[1600px] px-6 md:px-12 flex items-center justify-between">
-        <a href="#top" className="flex items-baseline gap-2 group">
+        <a href="/#top" className="flex items-baseline gap-2 group">
           <span className="font-display text-2xl tracking-tight">Atelier</span>
           <span className="eyebrow hidden sm:inline">Studio</span>
         </a>
@@ -44,7 +44,7 @@ export function Nav() {
         </nav>
 
         <a
-          href="#contacto"
+          href="/#contacto"
           className="hidden md:inline-flex items-center gap-2 text-xs tracking-[0.25em] uppercase border border-foreground/70 px-5 py-2.5 hover:bg-foreground hover:text-background transition-colors"
         >
           Reservar sesión
@@ -57,9 +57,15 @@ export function Nav() {
           className="md:hidden p-2"
         >
           <div className="w-6 space-y-1.5">
-            <span className={`block h-px bg-foreground transition-all ${open ? "translate-y-1.5 rotate-45" : ""}`} />
-            <span className={`block h-px bg-foreground transition-all ${open ? "opacity-0" : ""}`} />
-            <span className={`block h-px bg-foreground transition-all ${open ? "-translate-y-1.5 -rotate-45" : ""}`} />
+            <span
+              className={`block h-px bg-foreground transition-all ${open ? "translate-y-1.5 rotate-45" : ""}`}
+            />
+            <span
+              className={`block h-px bg-foreground transition-all ${open ? "opacity-0" : ""}`}
+            />
+            <span
+              className={`block h-px bg-foreground transition-all ${open ? "-translate-y-1.5 -rotate-45" : ""}`}
+            />
           </div>
         </button>
       </div>
@@ -77,7 +83,7 @@ export function Nav() {
             </a>
           ))}
           <a
-            href="#contacto"
+            href="/#contacto"
             onClick={() => setOpen(false)}
             className="mt-2 inline-flex items-center justify-center gap-2 text-[0.65rem] tracking-[0.3em] uppercase bg-foreground text-background px-5 py-4"
           >
