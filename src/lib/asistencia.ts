@@ -50,7 +50,7 @@ export function cargar(): Asistencia {
   if (typeof window === "undefined") return vacio;
   try {
     const bruto = window.localStorage.getItem(STORAGE_KEY);
-    if (!bruto) return vacio;
+    if (!bruto) return semillaSilat();
     const datos = JSON.parse(bruto) as Partial<Asistencia>;
     return {
       alumnos: Array.isArray(datos.alumnos) ? datos.alumnos : [],
@@ -68,6 +68,49 @@ export function guardar(datos: Asistencia): void {
   } catch {
     /* almacenamiento no disponible */
   }
+}
+
+// Grupo de Silat importado de la hoja "Lista de Asistencia Silat", con las
+// clases del 03 (jueves) y 08 (martes) de septiembre de 2026.
+const ALUMNOS_SILAT: [string, string, Estado, Estado][] = [
+  ["rut", "Rut", "ausente", "presente"],
+  ["sergio", "Sergio Silat", "presente", "presente"],
+  ["alejandro", "Alejandro Granjero", "ausente", "ausente"],
+  ["blancrow", "Blancrow", "ausente", "ausente"],
+  ["david", "DAVID Silat Bombero Forestal", "presente", "ausente"],
+  ["estefania", "Estefania", "presente", "ausente"],
+  ["lau", "Lau Poli Silat", "presente", "presente"],
+  ["mario", "mariosandoval69", "presente", "ausente"],
+  ["laura", "Laura Silat", "presente", "presente"],
+  ["oscar", "Oscar Silat V", "presente", "presente"],
+  ["pedro", "Pedro Felipe", "presente", "presente"],
+  ["rbk", "RBK", "presente", "presente"],
+  ["alberto", "Alberto Silat", "presente", "presente"],
+  ["diego", "Diego Morales", "ausente", "presente"],
+  ["elias", "Elias Crazy D", "ausente", "presente"],
+  ["jana", "Jana", "ausente", "ausente"],
+];
+
+const FECHAS_SILAT = ["2026-09-03", "2026-09-08"];
+
+export function semillaSilat(): Asistencia {
+  const alumnos: Alumno[] = ALUMNOS_SILAT.map(([clave, nombre]) => ({
+    id: `silat-${clave}`,
+    nombre,
+    grupo: "Silat",
+    activo: true,
+  }));
+  const sesiones: Sesion[] = FECHAS_SILAT.map((fecha, indice) => ({
+    fecha,
+    nota: "",
+    registro: Object.fromEntries(
+      ALUMNOS_SILAT.map(([clave, , jueves, martes]) => [
+        `silat-${clave}`,
+        indice === 0 ? jueves : martes,
+      ]),
+    ),
+  }));
+  return { alumnos, sesiones };
 }
 
 export function ordenarSesiones(sesiones: Sesion[]): Sesion[] {
