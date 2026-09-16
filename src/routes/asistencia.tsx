@@ -20,6 +20,63 @@ const GRADOS = ["Iniciación", "Intermedio", "Avanzado", "Instructor"] as const;
 
 const VACIO: Datos = { alumnos: [], registro: {} };
 
+const SEED_ALUMNOS: Alumno[] = [
+  { id: "seed-rut", nombre: "Rut", grado: "Iniciación" },
+  { id: "seed-sergio", nombre: "Sergio Silat", grado: "Iniciación" },
+  { id: "seed-alejandro", nombre: "Alejandro Granjero", grado: "Iniciación" },
+  { id: "seed-blancrow", nombre: "Blancrow", grado: "Iniciación" },
+  { id: "seed-david", nombre: "DAVID Silat Bombero Forestal", grado: "Iniciación" },
+  { id: "seed-estefania", nombre: "Estefania", grado: "Iniciación" },
+  { id: "seed-lau", nombre: "Lau Poli Silat", grado: "Iniciación" },
+  { id: "seed-mario", nombre: "mariosandoval69", grado: "Iniciación" },
+  { id: "seed-laura", nombre: "Laura Silat", grado: "Iniciación" },
+  { id: "seed-oscar", nombre: "Oscar Silat V", grado: "Iniciación" },
+  { id: "seed-pedro", nombre: "Pedro Felipe", grado: "Iniciación" },
+  { id: "seed-rbk", nombre: "RBK", grado: "Iniciación" },
+  { id: "seed-alberto", nombre: "Alberto Silat", grado: "Iniciación" },
+  { id: "seed-diego", nombre: "Diego Morales", grado: "Iniciación" },
+  { id: "seed-elias", nombre: "Elias Crazy D", grado: "Iniciación" },
+  { id: "seed-jana", nombre: "Jana", grado: "Iniciación" },
+];
+
+const SEED_PRESENTES_2026_09_03 = new Set([
+  "seed-sergio",
+  "seed-david",
+  "seed-estefania",
+  "seed-lau",
+  "seed-mario",
+  "seed-laura",
+  "seed-oscar",
+  "seed-pedro",
+  "seed-rbk",
+  "seed-alberto",
+]);
+
+const SEED_PRESENTES_2026_09_08 = new Set([
+  "seed-rut",
+  "seed-sergio",
+  "seed-lau",
+  "seed-laura",
+  "seed-oscar",
+  "seed-pedro",
+  "seed-rbk",
+  "seed-alberto",
+  "seed-diego",
+  "seed-elias",
+]);
+
+function marcasDe(presentes: Set<string>): Record<string, boolean> {
+  return Object.fromEntries(SEED_ALUMNOS.map((a) => [a.id, presentes.has(a.id)]));
+}
+
+const SEED: Datos = {
+  alumnos: SEED_ALUMNOS,
+  registro: {
+    "2026-09-03": marcasDe(SEED_PRESENTES_2026_09_03),
+    "2026-09-08": marcasDe(SEED_PRESENTES_2026_09_08),
+  },
+};
+
 function hoy() {
   return new Date().toISOString().slice(0, 10);
 }
@@ -32,7 +89,7 @@ function leer(): Datos {
   if (typeof window === "undefined") return VACIO;
   try {
     const crudo = window.localStorage.getItem(STORAGE_KEY);
-    if (!crudo) return VACIO;
+    if (!crudo) return SEED;
     const datos = JSON.parse(crudo) as Partial<Datos>;
     return {
       alumnos: Array.isArray(datos.alumnos) ? datos.alumnos : [],
