@@ -70,28 +70,30 @@ export function guardar(datos: Asistencia): void {
   }
 }
 
-// Grupo de Silat importado de la hoja "Lista de Asistencia Silat", con las
-// clases del 03 (jueves) y 08 (martes) de septiembre de 2026.
-const ALUMNOS_SILAT: [string, string, Estado, Estado][] = [
-  ["rut", "Rut", "ausente", "presente"],
-  ["sergio", "Sergio Silat", "presente", "presente"],
-  ["alejandro", "Alejandro Granjero", "ausente", "ausente"],
-  ["blancrow", "Blancrow", "ausente", "ausente"],
-  ["david", "DAVID Silat Bombero Forestal", "presente", "ausente"],
-  ["estefania", "Estefania", "presente", "ausente"],
-  ["lau", "Lau Poli Silat", "presente", "presente"],
-  ["mario", "mariosandoval69", "presente", "ausente"],
-  ["laura", "Laura Silat", "presente", "presente"],
-  ["oscar", "Oscar Silat V", "presente", "presente"],
-  ["pedro", "Pedro Felipe", "presente", "presente"],
-  ["rbk", "RBK", "presente", "presente"],
-  ["alberto", "Alberto Silat", "presente", "presente"],
-  ["diego", "Diego Morales", "ausente", "presente"],
-  ["elias", "Elias Crazy D", "ausente", "presente"],
-  ["jana", "Jana", "ausente", "ausente"],
+// Grupo de Silat importado de "Lista de Asistencia Silat (actualizada)" en
+// Drive, con las clases del 03-09 (jueves), 08-09 (martes) y 15-09 (martes)
+// de 2026. Ese archivo es la fuente de referencia: no incluye una clase el
+// 10-09, así que esa fecha no se siembra aquí (ver conversación).
+const ALUMNOS_SILAT: [string, string, Estado, Estado, Estado][] = [
+  ["rut", "Rut", "ausente", "presente", "presente"],
+  ["sergio", "Sergio Silat", "presente", "presente", "ausente"],
+  ["alejandro", "Alejandro Granjero", "ausente", "ausente", "ausente"],
+  ["blancrow", "Blancrow", "ausente", "ausente", "presente"],
+  ["david", "DAVID Silat Bombero Forestal", "presente", "ausente", "presente"],
+  ["estefania", "Estefania", "presente", "ausente", "ausente"],
+  ["lau", "Lau Poli Silat", "presente", "presente", "ausente"],
+  ["mario", "mariosandoval69", "presente", "ausente", "ausente"],
+  ["laura", "Laura Silat", "presente", "presente", "presente"],
+  ["oscar", "Oscar Silat V", "presente", "presente", "presente"],
+  ["pedro", "Pedro Felipe", "presente", "presente", "ausente"],
+  ["rbk", "RBK", "presente", "presente", "ausente"],
+  ["alberto", "Alberto Silat", "presente", "presente", "ausente"],
+  ["diego", "Diego Morales", "ausente", "presente", "ausente"],
+  ["elias", "Elias Crazy D", "ausente", "presente", "presente"],
+  ["jana", "Jana", "ausente", "ausente", "ausente"],
 ];
 
-const FECHAS_SILAT = ["2026-09-03", "2026-09-08"];
+const FECHAS_SILAT = ["2026-09-03", "2026-09-08", "2026-09-15"];
 
 export function semillaSilat(): Asistencia {
   const alumnos: Alumno[] = ALUMNOS_SILAT.map(([clave, nombre]) => ({
@@ -104,9 +106,9 @@ export function semillaSilat(): Asistencia {
     fecha,
     nota: "",
     registro: Object.fromEntries(
-      ALUMNOS_SILAT.map(([clave, , jueves, martes]) => [
+      ALUMNOS_SILAT.map(([clave, , ...estados]): [string, Estado] => [
         `silat-${clave}`,
-        indice === 0 ? jueves : martes,
+        estados[indice],
       ]),
     ),
   }));
