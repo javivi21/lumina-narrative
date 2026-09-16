@@ -65,6 +65,15 @@ const SEED_PRESENTES_2026_09_08 = new Set([
   "seed-elias",
 ]);
 
+const SEED_PRESENTES_2026_09_15 = new Set([
+  "seed-rut",
+  "seed-blancrow",
+  "seed-david",
+  "seed-laura",
+  "seed-oscar",
+  "seed-elias",
+]);
+
 function marcasDe(presentes: Set<string>): Record<string, boolean> {
   return Object.fromEntries(SEED_ALUMNOS.map((a) => [a.id, presentes.has(a.id)]));
 }
@@ -74,6 +83,7 @@ const SEED: Datos = {
   registro: {
     "2026-09-03": marcasDe(SEED_PRESENTES_2026_09_03),
     "2026-09-08": marcasDe(SEED_PRESENTES_2026_09_08),
+    "2026-09-15": marcasDe(SEED_PRESENTES_2026_09_15),
   },
 };
 
